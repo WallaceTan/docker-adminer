@@ -17,6 +17,17 @@ namespace docker {
 
 				return parent::_callParent($function, $args);
 			}
+
+// https://github.com/marcopeg/cakephp-adminer/blob/master/index.php
+			public function credentials() {
+				// return array($this->db_config->default['host'], $this->db_config->default['login'], $this->db_config->default['password']);
+				return array('192.168.130.77', 'keycloak', 'keycloak');
+			}
+
+			public function database() {
+				// return $this->db_config->default['database'];
+				return 'keycloak';
+			}
 		}
 
 		$plugins = [];
@@ -38,6 +49,14 @@ namespace {
 	function adminer_object() {
 		return \docker\adminer_object();
 	}
+
+/*
+	if ($_SERVER['QUERY_STRING'] == '') {
+		//header("Location: /?server=192.168.130.77&username=keycloak&db=keycloak");
+		header("Location: /info.php?server=192.168.130.77&username=keycloak&db=keycloak");
+	}
+*/
+	$_SERVER['QUERY_STRING'] = '';
 
 	require('adminer.php');
 }
